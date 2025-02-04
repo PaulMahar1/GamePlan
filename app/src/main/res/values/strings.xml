@@ -1,3 +1,39 @@
 <resources>
     <string name="app_name">GamePlan</string>
+
+    <string name="TC">
+        <b>GamePlan Terms and Conditions</b>\n\n
+
+<i>Effective Date: February 4th, 2025</i>\n
+
+        Welcome to GamePlan! By using this app, you agree to the following terms and conditions.
+
+1. Acceptance of Terms\n
+By accessing or using GamePlan, you accept and agree to be bound by these Terms. If you do not agree, please refrain from using the app.
+
+2. User Responsibilities\n
+
+You are responsible for any actions taken through your GamePlan account.
+Do not use GamePlan for any unlawful activities or purposes.
+Please play nice: no harassment, offensive language, or other inappropriate behavior.
+3. App Usage
+
+GamePlan is intended for entertainment purposes only.
+We make no guarantees that the app will always function flawlessly. Expect occasional glitches—this is technology, after all!
+4. Intellectual Property
+All content, graphics, and app features belong to GamePlan (the school assignment version, anyway). Copying, distributing, or reverse-engineering is a no-no.
+
+5. Data Collection
+We don't collect any personal data right now, but if we did, it would be treated responsibly.
+
+6. Liability Limitations
+
+Use GamePlan at your own risk.
+We are not responsible for lost progress, heated debates with friends, or app-induced existential crises.
+7. Updates and Changes
+We reserve the right to change these terms at any time. Updates will be posted here with an effective date.
+
+8. Contact
+For questions or concerns, reach out to GamePlan's totally real support team at [Insert Fake Email Address].
+    </string>
 </resources>
