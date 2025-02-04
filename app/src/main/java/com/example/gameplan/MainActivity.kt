@@ -28,7 +28,6 @@ class MainActivity : AppCompatActivity() {
             override fun run() {
                 startActivity(Intent(this@MainActivity, TandC::class.java))
                 finish()
-
             }
         }, 5000)
     }
