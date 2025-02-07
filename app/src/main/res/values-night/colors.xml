@@ -5,4 +5,6 @@
         <color name="logoWhite">#FDFDFD</color>
         <color name="LogoWhite">#FDFDFDFF</color>
         <color name="background">#194165</color>
+        <color name="leaving">#161616</color>
+        <color name="leaving3">#161616</color>
 </resources>
