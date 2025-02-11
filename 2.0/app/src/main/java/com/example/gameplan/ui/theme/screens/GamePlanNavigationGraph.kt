@@ -4,10 +4,10 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.gameplan.components.NavBar
 
 
 @Composable
-
 fun GamePlanNavigationGraph(){
 
     val navController = rememberNavController()

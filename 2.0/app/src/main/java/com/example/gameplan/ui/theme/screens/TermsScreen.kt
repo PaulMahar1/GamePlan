@@ -10,13 +10,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ComposeCompilerApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.fromHtml
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.content.pm.ShortcutInfoCompat.Surface
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.gameplan.R
-import com.example.gameplan.ui.theme.HtmlText
+import com.example.gameplan.ui.theme.JamieHtml
 
 @Composable
 fun TermsScreen(navController: NavController){
@@ -27,10 +29,8 @@ fun TermsScreen(navController: NavController){
         Column(
             modifier = Modifier.fillMaxWidth()
                 .padding(16.dp)
-        ) { 
-            HtmlText(R.string.Terms)
-
-            
+        ) {
+            JamieHtml(R.string.Terms)
         }
     }
 

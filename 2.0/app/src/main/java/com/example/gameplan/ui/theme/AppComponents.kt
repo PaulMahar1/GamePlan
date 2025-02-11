@@ -17,10 +17,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.fromHtml
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.gameplan.R
 import com.example.gameplan.ui.theme.screens.Game
 
 @Composable
@@ -59,14 +62,10 @@ fun ShowGame(game: Game){
     }
 }
 
-@Composable
-fun HtmlText(@StringRes stringResourceId: Int) {
-    val htmlText = stringResource(id = stringResourceId)
-    val annotatedString = buildAnnotatedString {
-        append(Html.fromHtml(htmlText, Html.FROM_HTML_MODE_LEGACY).toString())
-    }
 
-    Text(text = annotatedString)
+@Composable
+fun JamieHtml(@StringRes stringResourceId: Int){
+    Text(text = AnnotatedString.fromHtml(stringResource(id = stringResourceId)))
 }
 
 @Preview
