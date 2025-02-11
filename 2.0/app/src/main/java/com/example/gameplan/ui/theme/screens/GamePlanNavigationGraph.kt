@@ -2,6 +2,9 @@ package com.example.gameplan.ui.theme.screens
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+
 
 @Composable
 
@@ -16,6 +19,10 @@ fun GamePlanNavigationGraph(){
 
         composable(Routes.WELCOME_SCREEN){
             WelcomeScreen(navController)
+        }
+
+        composable(Routes.TERMS_SCREEN){
+            TermsScreen(navController)
         }
 
         composable(Routes.GAMES_SCREEN){
