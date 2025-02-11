@@ -28,5 +28,7 @@ fun GamePlanNavigationGraph(){
         composable(Routes.GAMES_SCREEN){
             GamesScreen(navController)
         }
+
+
     }
 }
