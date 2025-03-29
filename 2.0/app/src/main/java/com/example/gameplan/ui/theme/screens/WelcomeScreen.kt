@@ -23,7 +23,7 @@ import com.example.gameplan.R
     Surface(
         modifier = Modifier
             .fillMaxSize()
-            .clickable{navController.navigate(Routes.GAMES_SCREEN)}
+            .clickable{navController.navigate(Routes.TERMS_SCREEN)}
     ){
         Box(modifier = Modifier
             .fillMaxSize()
