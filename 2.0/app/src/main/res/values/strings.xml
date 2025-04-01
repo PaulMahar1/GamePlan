@@ -59,5 +59,13 @@
     ]]>
 </string>
 
+<string name="FriendListAPI">
+    https://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key=APIKEYHERE&amp;steamid=IDHERE&amp;relationship=friend
+</string>
+
+<string name="OwnedGamesAPI">
+<!--/include_played_free_games (optional, bool)-->
+    https://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=04E7A6580B01031C53C63E003B49425F&amp;steamid=76561198104511614&amp;format=json#
+</string>
 
 </resources>
