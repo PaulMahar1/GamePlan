@@ -24,6 +24,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.gameplan.components.BottomNav
 import com.example.gameplan.components.NavBar
 import com.example.gameplan.components.TypeSquare
+import com.example.gameplan.data.Friend
 
 
 enum class GameMode { SinglePlayer, Multiplayer }

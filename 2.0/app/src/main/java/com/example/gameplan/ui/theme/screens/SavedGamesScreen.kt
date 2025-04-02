@@ -15,11 +15,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.example.gameplan.BuildConfig
 import com.example.gameplan.components.BottomNav
 import com.example.gameplan.components.NavBar
 import com.example.gameplan.ui.theme.ShowGame
 
 //data class Game(val name: String, val age: Int)
+
+val apiKey = BuildConfig.STEAM_API_KEY
 
 @Composable
 fun SavedGamesScreen(navController: NavHostController) {

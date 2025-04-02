@@ -14,7 +14,7 @@ data class X646570(
     val success: Boolean?
 )
 
-data class Data(
+data class GameData(
     @SerializedName("about_the_game")
     val aboutTheGame: String?,
     @SerializedName("achievements")

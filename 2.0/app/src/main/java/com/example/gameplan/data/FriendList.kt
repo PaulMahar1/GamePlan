@@ -3,10 +3,10 @@ import com.google.gson.annotations.SerializedName
 
 data class FriendList(
     @SerializedName("friendslist")
-    val friendslist: Friendslist?
+    val friendsListResponse: FriendsListResponse
 )
 
-data class Friendslist(
+data class FriendsListResponse(
     @SerializedName("friends")
     val friends: List<Friend?>?
 )

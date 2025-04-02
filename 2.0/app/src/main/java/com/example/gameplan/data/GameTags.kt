@@ -2,7 +2,7 @@ package com.example.gameplan.data
 
 import com.google.gson.annotations.SerializedName
 
-data class GameInfo2(
+data class GameTags(
     @SerializedName("appid")
     val appid: Int?,
     @SerializedName("average_2weeks")

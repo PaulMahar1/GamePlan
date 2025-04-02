@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -9,6 +11,7 @@ android {
     namespace = "com.example.gameplan"
     compileSdk = 35
 
+
     defaultConfig {
         applicationId = "com.example.gameplan"
         minSdk = 25
@@ -17,6 +20,7 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "STEAM_API_KEY", "\"${findProperty("STEAM_API_KEY")}\"")
     }
 
     buildTypes {
@@ -37,8 +41,10 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
+
 
 
 
