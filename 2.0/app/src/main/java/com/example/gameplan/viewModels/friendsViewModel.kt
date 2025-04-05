@@ -1,5 +1,6 @@
 package com.example.gameplan.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.gameplan.data.FriendList
@@ -8,6 +9,8 @@ import kotlinx.coroutines.launch
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class FriendListViewModel : ViewModel() {
 
@@ -16,7 +19,7 @@ class FriendListViewModel : ViewModel() {
 
     var errorMessage by mutableStateOf("")
 
-    var playerId by mutableStateOf<String?>(null)
+    var playerId by mutableStateOf("")
         private set
 
     var errorMessage2 by mutableStateOf("")
@@ -25,17 +28,19 @@ class FriendListViewModel : ViewModel() {
 
 
 
-    fun fetchFriendNames(apiKey: String, steamId: String) {
+    suspend fun fetchFriendNames(apiKey: String, steamId: String) {
         viewModelScope.launch {
             try {
                 val response = RetrofitClient.api.getSteamId(apiKey, steamId)
                 if (response.isSuccessful) {
                     val vanityResponse = response.body()
                     if (vanityResponse != null && vanityResponse.response.success == 1) {
-                        playerId = vanityResponse.response.steamid
+                       playerId = vanityResponse.response.steamid
                         errorMessage2 = ""
+                       println("Ok 1st Call worked... $playerId ${vanityResponse.response.steamid} ${vanityResponse.response.success}")
                     } else {
                         errorMessage2 = "Failed to resolve vanity URL."
+                        println("Failed to resolved vanity URL")
                     }
                 }
                 val friendListResponse = RetrofitClient.api.getFriendList(apiKey, playerId)
@@ -62,6 +67,7 @@ class FriendListViewModel : ViewModel() {
                 } else {
                     errorMessage = "Error: ${friendListResponse.code()}"
                 }
+
             } catch (e: Exception) {
                 errorMessage = "Exception: ${e.message}"
             }

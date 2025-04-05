@@ -9,6 +9,7 @@ import com.example.gameplan.data.GameTags
 import com.example.gameplan.data.PlayerSummary
 import com.example.gameplan.data.PlayerSummaryResponse
 import com.example.gameplan.data.VanityId
+
 import com.example.gameplan.data.VanityResponse
 
 interface SteamApiService {
@@ -22,7 +23,7 @@ interface SteamApiService {
     @GET("ISteamUser/GetFriendList/v0001/")
     suspend fun getFriendList(
         @Query("key") apiKey: String,
-        @Query("steamid") steamId: String?,
+        @Query("steamid") steamId: String,
         @Query("relationship") relationship: String = "friend"
     ): Response<FriendList>
 

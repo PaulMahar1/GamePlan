@@ -25,7 +25,6 @@ fun FriendsScreen(navController: NavHostController, username: String, viewModel:
     LaunchedEffect(Unit) {
         viewModel.fetchFriendNames(STEAM_API_KEY, username)
     }
-
     Column(modifier = Modifier.padding(16.dp)) {
         if (error.isNotEmpty()) {
             Text(text = error)
@@ -34,6 +33,7 @@ fun FriendsScreen(navController: NavHostController, username: String, viewModel:
         LazyColumn {
             items(friends) { friend ->
                 FriendSquare(player = friend, route = Routes.GAMES_SCREEN, navController = navController)
+
             }
         }
     }

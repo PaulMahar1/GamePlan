@@ -7,7 +7,6 @@ data class VanityId(
 )
 
 data class VanityResponse(
-    @SerializedName("response")
     val steamid: String,
     val success: Int
 )
