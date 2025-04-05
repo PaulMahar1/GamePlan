@@ -50,9 +50,9 @@ fun PlayerSelectScreen(navController: NavHostController){
                     Row(modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceEvenly) {
                         // FRIEND SQUARE NEEDS ROUTING ADDED SIMILAR TO HOW BOTTOM NAV BUTTONS DO IT
-                        TypeSquare(friend = Friend(1, "Single", "Single Player"), onClick = { gameMode = GameMode.SinglePlayer
+                        TypeSquare(friend = Friend(1, "https://img.icons8.com/?size=100&id=yl8D7ARqyYe3&format=png&color=000000", "Single Player"), onClick = { gameMode = GameMode.SinglePlayer
                             showDialog = true })
-                        TypeSquare(friend = Friend(2, "Multi", "Multi Player"), onClick = { gameMode = GameMode.Multiplayer
+                        TypeSquare(friend = Friend(2, "https://img.icons8.com/?size=100&id=JXxbQn0CKTqI&format=png&color=000000", "Multi Player"), onClick = { gameMode = GameMode.Multiplayer
                             showDialog = true })
                         }
 
@@ -67,7 +67,8 @@ fun PlayerSelectScreen(navController: NavHostController){
                                 if (gameMode == GameMode.SinglePlayer){
                                     navController.navigate(Routes.GAMES_SCREEN)
                                 } else {
-                                    navController.navigate(Routes.FRIEND_SCREEN)
+                                    println(username)
+                                    navController.navigate("FRIEND_SCREEN/${username}")
                                 }
                                 showDialog = false
                             }

@@ -19,5 +19,3 @@ data class Friend(
     @SerializedName("steamid")
     val steamid: String?
 )
-
-

@@ -7,16 +7,19 @@ import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import coil.compose.AsyncImage
 import com.example.gameplan.data.Friend
 import com.example.gameplan.ui.theme.screens.Routes
 import com.example.gameplan.data.FriendList
+import com.example.gameplan.data.Player
 
 @Composable
-fun FriendSquare(friend: Friend, route: String, navController: NavHostController) {
+fun FriendSquare(player: Player, route: String, navController: NavHostController) {
             ElevatedCard(
                 onClick = {navController.navigate(route)},
                 elevation = CardDefaults.cardElevation(
@@ -25,8 +28,12 @@ fun FriendSquare(friend: Friend, route: String, navController: NavHostController
                 modifier = Modifier
                     .size(width = 100.dp, height = 100.dp)){
                 //IMAGE GOES HERE
+                AsyncImage(
+                    model = player.avatarmedium,
+                    contentDescription = "Users Avatar on Steam"
+                )
                 Text(
-                    text = friend.steamid!!,
+                    text = player.personaname!!,
                     modifier = Modifier
                         .padding(16.dp),
                     textAlign = TextAlign.Center,
@@ -49,7 +56,10 @@ fun TypeSquare(friend: Friend, onClick: () -> Unit) {
         ),
         modifier = Modifier
             .size(width = 100.dp, height = 100.dp)){
-        //IMAGE GOES HERE
+        AsyncImage(
+            model = friend.relationship,
+            contentDescription = ""
+        )
         Text(
             text = friend.steamid!!,
             modifier = Modifier
@@ -67,9 +77,9 @@ fun TypeSquare(friend: Friend, onClick: () -> Unit) {
 
 
 
-@Preview
-@Composable
-fun ShowFriendPreview(){
-    val navController = androidx.navigation.compose.rememberNavController()
-    FriendSquare(friend = Friend(2012, "Friend", "Matty" ), Routes.GAMES_SCREEN, navController)
-}
+//@Preview
+//@Composable
+//fun ShowFriendPreview(){
+//    val navController = androidx.navigation.compose.rememberNavController()
+//    FriendSquare(friend = Player(2012, "Friend", "Matty" ), Routes.GAMES_SCREEN, navController)
+//}

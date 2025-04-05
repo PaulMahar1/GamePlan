@@ -1,3 +1,4 @@
+import com.example.gameplan.data.FriendList
 import com.example.gameplan.data.OwnedGamesResponse
 import retrofit2.Response
 import retrofit2.http.GET
@@ -5,7 +6,9 @@ import retrofit2.http.Query
 import com.example.gameplan.data.FriendsListResponse
 import com.example.gameplan.data.GameData
 import com.example.gameplan.data.GameTags
+import com.example.gameplan.data.PlayerSummary
 import com.example.gameplan.data.PlayerSummaryResponse
+import com.example.gameplan.data.VanityId
 import com.example.gameplan.data.VanityResponse
 
 interface SteamApiService {
@@ -14,14 +17,14 @@ interface SteamApiService {
     suspend fun getSteamId(
         @Query("key") apiKey: String,
         @Query("vanityurl") username: String
-    ): Response<VanityResponse>
+    ): Response<VanityId>
 
     @GET("ISteamUser/GetFriendList/v0001/")
     suspend fun getFriendList(
         @Query("key") apiKey: String,
-        @Query("steamid") steamId: String,
+        @Query("steamid") steamId: String?,
         @Query("relationship") relationship: String = "friend"
-    ): Response<FriendsListResponse>
+    ): Response<FriendList>
 
     @GET("IPlayerService/GetOwnedGames/v0001/")
     suspend fun getOwnedGames(
@@ -33,8 +36,8 @@ interface SteamApiService {
     @GET("ISteamUser/GetPlayerSummaries/v0002/")
     suspend fun getPlayerSummary(
         @Query("key") apiKey: String,
-        @Query("steamids") friendId: String
-    ): Response<PlayerSummaryResponse>
+        @Query("steamids") steamIds: String
+    ): Response<PlayerSummary>
 
     @GET("store.steampowered.com/api/appdetails")
     suspend fun getGameDetails(
@@ -48,3 +51,6 @@ interface SteamApiService {
         @Query("appid") gameId: String
     ): Response<GameTags>
 }
+
+
+
