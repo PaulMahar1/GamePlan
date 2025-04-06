@@ -7,6 +7,7 @@ import com.example.gameplan.data.FriendsListResponse
 import com.example.gameplan.data.GameData
 import com.example.gameplan.data.GameInfo
 import com.example.gameplan.data.GameTags
+import com.example.gameplan.data.OwnedGames
 import com.example.gameplan.data.PlayerSummary
 import com.example.gameplan.data.PlayerSummaryResponse
 import com.example.gameplan.data.VanityId
@@ -33,7 +34,7 @@ interface SteamApiService {
         @Query("key") apiKey: String,
         @Query("steamid") steamId: String,
         @Query("format") format: String = "json"
-    ): Response<OwnedGamesResponse>
+    ): Response<OwnedGames>
 
     @GET("ISteamUser/GetPlayerSummaries/v0002/")
     suspend fun getPlayerSummary(

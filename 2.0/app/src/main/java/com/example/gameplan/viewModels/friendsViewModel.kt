@@ -28,6 +28,7 @@ class FriendListViewModel : ViewModel() {
 
 
 
+
     suspend fun fetchFriendNames(apiKey: String, steamId: String) {
         viewModelScope.launch {
             try {
