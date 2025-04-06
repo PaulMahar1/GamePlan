@@ -21,7 +21,8 @@ import kotlinx.coroutines.withContext
 
 
 class GameListViewModel : ViewModel() {
-    var gamesList:List<Int> = mutableStateListOf()
+    var gamesList by mutableStateOf<List<Int>>(emptyList())
+        private set
     suspend fun filterGames(players: List<Player>) =
         withContext(Dispatchers.IO) {
             var games = players.map { player ->
