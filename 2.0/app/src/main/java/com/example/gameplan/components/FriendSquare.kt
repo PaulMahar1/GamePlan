@@ -8,6 +8,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -19,9 +20,14 @@ import com.example.gameplan.data.FriendList
 import com.example.gameplan.data.Player
 
 @Composable
-fun FriendSquare(player: Player, route: String, navController: NavHostController) {
-            ElevatedCard(
-                onClick = {navController.navigate(route)},
+fun FriendSquare(player: Player, route: String?, navController: NavHostController) {
+    val handler = LocalUriHandler.current
+    ElevatedCard(
+                onClick = {
+                    if (route != null) {
+                        handler.openUri(route)
+                    }
+                },
                 elevation = CardDefaults.cardElevation(
                     defaultElevation = 6.dp
                 ),

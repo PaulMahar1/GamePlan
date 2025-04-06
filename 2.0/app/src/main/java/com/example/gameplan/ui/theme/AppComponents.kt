@@ -24,10 +24,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.gameplan.R
-import com.example.gameplan.ui.theme.screens.Game
+import com.example.gameplan.data.GameData
 
 @Composable
-fun ShowGame(game: Game){
+fun ShowGame(game: GameData?){
     Column(
         modifier = Modifier
             .fillMaxWidth()){
@@ -41,18 +41,26 @@ fun ShowGame(game: Game){
                 ),
                 modifier = Modifier
                     .size(width = 240.dp, height = 100.dp)){
-                Text(
-                    text = game.name,
-                    modifier = Modifier
-                        .padding(16.dp),
-                    textAlign = TextAlign.Center,
-                )
-                Text(
-                    text = game.age.toString(),
-                    modifier = Modifier
-                        .padding(top = 6.dp,start = 16.dp),
-                    textAlign = TextAlign.Center,
-                )
+                if (game != null) {
+                    game.name?.let {
+                        Text(
+                            text = it,
+                            modifier = Modifier
+                                .padding(16.dp),
+                            textAlign = TextAlign.Center,
+                        )
+                    }
+                }
+                if (game != null) {
+                    game.shortDescription?.let {
+                        Text(
+                            text = it,
+                            modifier = Modifier
+                                .padding(top = 6.dp,start = 16.dp),
+                            textAlign = TextAlign.Center,
+                        )
+                    }
+                }
             }
         }
         Spacer(
@@ -68,10 +76,6 @@ fun JamieHtml(@StringRes stringResourceId: Int){
     Text(text = AnnotatedString.fromHtml(stringResource(id = stringResourceId)))
 }
 
-@Preview
-@Composable
-fun ShowGamePreview(){
-    ShowGame(game = Game("Minecraft", 2012))
-}
+
 
 // meow

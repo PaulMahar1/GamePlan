@@ -12,3 +12,15 @@ object RetrofitClient {
             .create(SteamApiService::class.java)
     }
 }
+
+object StoreClient {
+    private const val BASE_URL = "http://store.steampowered.com/"
+
+    val api: StoreApiService by lazy {
+        Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(StoreApiService::class.java)
+    }
+}

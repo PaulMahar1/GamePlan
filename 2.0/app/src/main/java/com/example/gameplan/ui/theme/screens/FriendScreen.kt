@@ -32,7 +32,7 @@ fun FriendsScreen(navController: NavHostController, username: String, viewModel:
 
         LazyColumn {
             items(friends) { friend ->
-                FriendSquare(player = friend, route = Routes.GAMES_SCREEN, navController = navController)
+                FriendSquare(player = friend, route = friend.profileurl, navController = navController)
 
             }
         }

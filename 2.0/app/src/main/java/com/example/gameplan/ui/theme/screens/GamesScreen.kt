@@ -9,20 +9,32 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.example.gameplan.BuildConfig.STEAM_API_KEY
 import com.example.gameplan.components.BottomNav
+import com.example.gameplan.components.FriendSquare
 import com.example.gameplan.components.NavBar
 import com.example.gameplan.ui.theme.ShowGame
+import com.example.gameplan.viewmodel.GameListViewModel
 
-data class Game(val name: String, val age: Int)
+
 
 @Composable
-fun GamesScreen(navController: NavHostController) {
+fun GamesScreen(navController: NavHostController, viewModel: GameListViewModel = viewModel()) {
+    val shownGames = viewModel.gameResponse?.name
+
+    LaunchedEffect(Unit) {
+        viewModel.fetchGames("646570")
+    }
+
+
     Surface(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -35,29 +47,19 @@ fun GamesScreen(navController: NavHostController) {
                     .padding(18.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                // Fake list before real data
-                val games = listOf(
-                    Game("Alice", 25),
-                    Game("Bob", 30),
-                    Game("Charlie", 35),
-                    Game("Alice", 25),
-                    Game("Bob", 30),
-                    Game("Charlie", 35),
-                    Game("Alice", 25),
-                    Game("Bob", 30),
-                    Game("Charlie", 35)
-                )
 
-                LazyColumn {
-                    items(games) { game ->
-                        ShowGame(game)
-                    }
+if (shownGames != null) {
+    println(shownGames)
+}
+//                        ShowGame(game = shownGames)
+
+
                 }
             }
             BottomNav(navController)
         }
     }
-}
+
 
 @Preview
 @Composable

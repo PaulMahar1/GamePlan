@@ -3,14 +3,11 @@ package com.example.gameplan.data
 import android.provider.ContactsContract
 import com.google.gson.annotations.SerializedName
 
-data class GameInfo(
-    @SerializedName("646570")
-    val x646570: X646570?
-)
+typealias GameInfo = Map<String, GameTwo>
 
-data class X646570(
+data class GameTwo(
     @SerializedName("data")
-    val `data`: ContactsContract.Contacts.Data?,
+    val `data`: GameData?,
     @SerializedName("success")
     val success: Boolean?
 )

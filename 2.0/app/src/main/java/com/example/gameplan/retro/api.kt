@@ -5,6 +5,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 import com.example.gameplan.data.FriendsListResponse
 import com.example.gameplan.data.GameData
+import com.example.gameplan.data.GameInfo
 import com.example.gameplan.data.GameTags
 import com.example.gameplan.data.PlayerSummary
 import com.example.gameplan.data.PlayerSummaryResponse
@@ -40,17 +41,21 @@ interface SteamApiService {
         @Query("steamids") steamIds: String
     ): Response<PlayerSummary>
 
-    @GET("store.steampowered.com/api/appdetails")
-    suspend fun getGameDetails(
-        @Query("key") apiKey: String,
-        @Query("appids") gameId: String
-    ): Response<GameData>
 
     @GET("https://steamspy.com/api.php")
     suspend fun getGameTags(
         @Query("request") request: String = "appdetails",
         @Query("appid") gameId: String
     ): Response<GameTags>
+}
+
+interface StoreApiService {
+
+    @GET("api/appdetails")
+    suspend fun getGameDetails(
+        @Query("appids") gameId: String
+    ): Response<GameInfo>
+
 }
 
 
