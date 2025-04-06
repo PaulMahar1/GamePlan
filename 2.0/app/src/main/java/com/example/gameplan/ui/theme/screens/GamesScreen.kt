@@ -43,7 +43,7 @@ fun GamesScreen(navController: NavHostController, sharedViewModel: SharedStateVi
          viewModel.filterGames(sharedFriendsList)
     }
 
-    var shownGames = viewModel.gamesList
+    val shownGames = viewModel.gamesList
     Log.d("Games Screen", "GamesScreen: $shownGames")
     Surface(
         modifier = Modifier.fillMaxSize()
