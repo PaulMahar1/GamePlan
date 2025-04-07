@@ -7,13 +7,70 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
 
-// Any shared state between screens will be defined here.
 class SharedStateViewModel : ViewModel() {
-    private val _sharedFriendsList = MutableStateFlow(emptyList<Player>()) // Initial value is 0
+    //Initial value is going to be a empty list. INTERNAL USE ONLY
+    // Think of this as our "setter" for the friends list state
+    private val _sharedFriendsList = MutableStateFlow(emptyList<Player>())
+    // Our "getter" for our friends list. When you call SharedStateViewModel.updateSharedFriendsList,
+    // your not updating this, therefore if _sharedFriendsList hasnt changed, neither wil this.
     val sharedFriendsList: StateFlow<List<Player>> = _sharedFriendsList.asStateFlow()
 
+    private val _sharedCurrentPlayer = MutableStateFlow<Player?>(null)
+
+    //This is how we updated our friends list. It takes a list of select players from the friend screen
     fun updateSharedFriendsList(newValue: List<Player>) {
-        _sharedFriendsList.value = newValue
+
+        val tempList = newValue.toMutableList()
+        tempList.add(_sharedCurrentPlayer.value!!)
+        _sharedFriendsList.value = tempList
+    }
+
+
+    suspend fun updatedCurrentPlayer(newValue: String) {
+        val currentPlayerId = getCurrentUserId(newValue)
+        if(currentPlayerId != null){
+            val player: Player? = setCurrentUser(currentPlayerId)
+            if(player!= null){
+                _sharedCurrentPlayer.value = player
+            }
+        }
+
+    }
+    // Private function
+    // Returns provided users steamId
+
+    private suspend fun getCurrentUserId(user: String): String? {
+        try {
+            val response = RetrofitClient.api.getSteamId("04E7A6580B01031C53C63E003B49425F", user)
+            if (response.isSuccessful) {
+                val vanityResponse = response.body()
+                return if (vanityResponse != null && vanityResponse.response.success == 1) {
+                    vanityResponse.response.steamid
+                } else {
+                    null
+                }
+            } else {
+                return null
+            }
+        } catch (e: Exception) {
+            return null
+        }
+    }
+    // Private again. This receives the Player object for any provided steamid.
+
+    private suspend fun setCurrentUser(userSteamId: String): Player? {
+        try {
+            val response =
+                RetrofitClient.api.getPlayerSummary("04E7A6580B01031C53C63E003B49425F", userSteamId)
+            return if (response.isSuccessful) {
+                response.body()!!.playerSummaryResponse.players!![0]
+            } else {
+                null
+            }
+        } catch (e: Exception) {
+            return null
+        }
+
     }
 }
 

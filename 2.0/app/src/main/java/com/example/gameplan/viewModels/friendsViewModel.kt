@@ -1,16 +1,13 @@
 package com.example.gameplan.viewmodel
 
-import android.util.Log
+
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.gameplan.data.FriendList
 import com.example.gameplan.data.Player
 import kotlinx.coroutines.launch
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 
 class FriendListViewModel : ViewModel() {
 
@@ -26,10 +23,7 @@ class FriendListViewModel : ViewModel() {
         private set
 
 
-
-
-
-    suspend fun fetchFriendNames(apiKey: String, steamId: String) {
+    fun fetchFriendNames(apiKey: String, steamId: String) {
         viewModelScope.launch {
             try {
                 val response = RetrofitClient.api.getSteamId(apiKey, steamId)
@@ -50,7 +44,6 @@ class FriendListViewModel : ViewModel() {
                     println("Fetched Friends: $friends")  // Add this log to check friends
 
                     val ids = friends?.mapNotNull { it.steamid }?.joinToString(",")
-                    println("Friend IDs: $ids")  // Add this log to check IDs
 
                     if (!ids.isNullOrEmpty()) {
                         val summaryResponse = RetrofitClient.api.getPlayerSummary(apiKey, ids)
@@ -58,7 +51,7 @@ class FriendListViewModel : ViewModel() {
                             friendNames =
                                 summaryResponse.body()?.playerSummaryResponse?.players?.filterNotNull()
                                     ?: emptyList()
-                            println("Player Summary: $friendNames")  // Add this log
+                            println("Player Summary: $friendNames")
                         } else {
                             errorMessage = "Failed to get player summaries"
                         }

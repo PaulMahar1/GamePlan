@@ -38,15 +38,19 @@ fun FriendsScreen(navController: NavHostController, username: String, viewModel:
 
     LaunchedEffect(Unit) {
         viewModel.fetchFriendNames(
-                "04E7A6580B01031C53C63E003B49425F", username)
+            "04E7A6580B01031C53C63E003B49425F", username
+        )
     }
+
     Column(modifier = Modifier.padding(16.dp)) {
         if (error.isNotEmpty()) {
             Text(text = error)
         }
-        Button(onClick ={
+        Button(onClick = {
             navController.navigate(Routes.GAMES_SCREEN)
-        }) { }
+        }) {
+            Text("Go to Games")
+        }
 
         LazyColumn {
             items(friends) { friend ->
@@ -70,4 +74,3 @@ fun FriendsScreen(navController: NavHostController, username: String, viewModel:
     }
 }
 
-class FilterFriends()

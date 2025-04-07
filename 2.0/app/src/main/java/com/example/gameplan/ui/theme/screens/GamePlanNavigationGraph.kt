@@ -23,7 +23,7 @@ fun GamePlanNavigationGraph(){
     NavHost(navController = navController, startDestination = Routes.WELCOME_SCREEN){
 
         composable(Routes.PLAYER_SELECT_SCREEN){
-            PlayerSelectScreen(navController)
+            PlayerSelectScreen(navController,sharedViewModel)
         }
 
         composable(Routes.WELCOME_SCREEN){
