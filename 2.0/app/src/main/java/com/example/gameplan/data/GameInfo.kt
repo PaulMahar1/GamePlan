@@ -1,6 +1,5 @@
 package com.example.gameplan.data
 
-import android.provider.ContactsContract
 import com.google.gson.annotations.SerializedName
 
 typealias GameInfo = Map<String, GameTwo>

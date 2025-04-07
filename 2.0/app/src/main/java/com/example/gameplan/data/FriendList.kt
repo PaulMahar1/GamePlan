@@ -1,4 +1,5 @@
 package com.example.gameplan.data
+
 import com.google.gson.annotations.SerializedName
 
 data class FriendList(
