@@ -1,3 +1,10 @@
+/*TODO
+    Not sure if its in here or in the friendsViewModel
+        But we need to figure out why the 'go to games' button on FriendScreen crashes
+        see FriendScreen To do for more info
+    Make functioning api call for Selected Friends > Common Games
+ */
+
 package com.example.gameplan.viewmodel
 
 import RetrofitClient

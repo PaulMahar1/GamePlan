@@ -1,3 +1,9 @@
+/*TODO
+    Remove onclick add to db.
+    only needed this for the game screen.
+    this screen should only have the delete.
+*/
+
 package com.example.gameplan.ui.theme.screens
 
 import android.util.Log

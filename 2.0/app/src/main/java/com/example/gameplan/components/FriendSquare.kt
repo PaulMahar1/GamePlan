@@ -1,6 +1,11 @@
 package com.example.gameplan.components
 
 import android.util.Log
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.CardDefaults
@@ -8,7 +13,9 @@ import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -17,11 +24,10 @@ import coil.compose.AsyncImage
 import com.example.gameplan.data.Friend
 import com.example.gameplan.data.Player
 
-
 @Composable
-fun FriendSquare(
+fun tFriendSquare(
     player: Player, route: String?,
-    navController: NavHostController,
+//    navController: NavHostController,
     isSelected: Boolean, // Indicate if the friend is selected
     onFriendSelected: (Boolean) -> Unit
 ) {
@@ -46,43 +52,45 @@ fun FriendSquare(
                 .padding(16.dp),
             textAlign = TextAlign.Center,
         )
-
-//                Text(   CAN BE ADDED BACK IN FOR ADDITIONAL FRIEND DETAILS
-//                    text = game.friendsSince.toString(),
-//                    modifier = Modifier
-//                        .padding(top = 6.dp,start = 16.dp),
-//                    textAlign = TextAlign.Center,
-//                )
     }
 }
+
 @Composable
-fun TypeSquare(friend: Friend, onClick: () -> Unit) {
-    ElevatedCard(
-        onClick = { onClick() },
-        elevation = CardDefaults.cardElevation(
-            defaultElevation = 6.dp
-        ),
-        modifier = Modifier
-            .size(width = 100.dp, height = 100.dp)){
-        AsyncImage(
-            model = friend.relationship,
-            contentDescription = ""
-        )
-        Text(
-            text = friend.steamid!!,
+fun FriendSquare(
+    player: Player, route: String?,
+//    navController: NavHostController,
+    isSelected: Boolean, // Indicate if the friend is selected
+    onFriendSelected: (Boolean) -> Unit
+) {
+    Column(
+        modifier = Modifier.padding(8.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        ElevatedCard(
+            onClick = {
+                onFriendSelected(!isSelected)
+            },
+            elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),
             modifier = Modifier
-                .padding(16.dp),
-            textAlign = TextAlign.Center,
+                .size(width = 100.dp, height = 100.dp)
+        ) {
+
+            AsyncImage(
+                model = player.avatarmedium,
+                modifier = Modifier
+                    .fillMaxSize(),
+                contentDescription = "$player's Avatar on Steam"
+            )
+        }
+        Spacer(modifier = Modifier.height(10.dp))
+
+        Text(
+            text = player.personaname!!,
+            modifier = Modifier
+                .align(Alignment.CenterHorizontally)
         )
-//                Text(   CAN BE ADDED BACK IN FOR ADDITIONAL FRIEND DETAILS
-//                    text = game.friendsSince.toString(),
-//                    modifier = Modifier
-//                        .padding(top = 6.dp,start = 16.dp),
-//                    textAlign = TextAlign.Center,
-//                )
     }
 }
-
 
 
 //@Preview
