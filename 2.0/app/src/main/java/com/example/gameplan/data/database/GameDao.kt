@@ -11,14 +11,14 @@ interface GameDao {
     // update or insert game
     // suspend creates coroutine
     @Upsert
-    fun upsertGame(game: Game)
+    fun upsertGame(gameEntity: GameEntity)
 
     // delete game
     // suspend creates coroutine
     @Delete
-    fun deleteGame(game: Game)
+    fun deleteGame(gameEntity: GameEntity)
 
     // get all games
     @Query("SELECT * FROM savedGames")
-    fun getSavedGames(): List<Game>
+    fun getSavedGames(): List<GameEntity>
 }
