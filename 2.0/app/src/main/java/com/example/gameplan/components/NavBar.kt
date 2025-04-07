@@ -21,29 +21,32 @@ import com.example.gameplan.ui.theme.Typography
 
 @Composable
 fun NavBar() {
-
-        Column(modifier = Modifier.fillMaxWidth(),
-            horizontalAlignment = Alignment.CenterHorizontally) {
-            Spacer(modifier = Modifier.size(36.dp))
-            Row(modifier = Modifier.fillMaxWidth()
+    Column(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Spacer(modifier = Modifier.size(36.dp))
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
                 .background(color = Color.Cyan)
                 .height(46.dp),
-                verticalAlignment = Alignment.CenterVertically)
-            {
-                Text(modifier = Modifier.fillMaxWidth(),
-                    text = "GamePlan",
-                    textAlign = TextAlign.Center,
-                    style = Typography.titleLarge
-
-
-                )
-            }
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                modifier = Modifier.fillMaxWidth(),
+                text = "GamePlan",
+                textAlign = TextAlign.Center,
+                style = Typography.titleLarge
+            )
         }
     }
+}
 
 @Preview
 @Composable
-fun NavBarPreview(){
+fun NavBarPreview() {
     NavBar()
 }
+
 

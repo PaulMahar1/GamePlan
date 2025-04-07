@@ -20,19 +20,20 @@ import androidx.navigation.NavHostController
 import com.example.gameplan.ui.theme.screens.Routes
 
 @Composable
-fun BottomNav(navController: NavHostController) {
-    Column (
-        modifier = Modifier.fillMaxWidth()
-    ){ //COLUMN START
+fun BottomNav(navController: NavHostController, modifier: Modifier = Modifier) {
+    Column(
+        modifier = modifier.fillMaxWidth()
+    ) {
         Row(
-            modifier = Modifier.height(56.dp)
+            modifier = Modifier
+                .height(56.dp)
                 .fillMaxWidth()
                 .background(color = Color.Cyan),
             horizontalArrangement = Arrangement.SpaceEvenly
-        ){ //ROW START
+        ) {
             NavButton(Icons.Filled.Home, "Home", Routes.WELCOME_SCREEN, navController)
             NavButton(Icons.Filled.PlayArrow, "Play", Routes.PLAYER_SELECT_SCREEN, navController)
-            NavButton(Icons.Filled.Favorite, "Favorite", Routes.GAMES_SCREEN, navController)
+            NavButton(Icons.Filled.Favorite, "Favorite", Routes.SAVED_GAMES_SCREEN, navController)
         }
     }
 }
