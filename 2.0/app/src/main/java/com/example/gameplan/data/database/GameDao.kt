@@ -9,14 +9,16 @@ import androidx.room.Upsert
 interface GameDao {
 
     // update or insert game
-    // suspend creates coroutine
     @Upsert
     fun upsertGame(gameEntity: GameEntity)
 
     // delete game
-    // suspend creates coroutine
     @Delete
     fun deleteGame(gameEntity: GameEntity)
+
+    //testing delete
+    @Query("DELETE FROM savedGames WHERE gameId = :id")
+    fun testdeleteGame(id: Int?)
 
     // get all games
     @Query("SELECT * FROM savedGames")
