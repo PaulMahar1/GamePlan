@@ -31,38 +31,29 @@ import com.example.gameplan.viewModels.SharedStateViewModel
 @Composable
 fun FriendsScreen(navController: NavHostController, username: String, viewModel: FriendListViewModel = viewModel(),
                   sharedViewModel: SharedStateViewModel) {
-    val friends by viewModel.friendNames.collectAsState()
+    val friends = viewModel.friendNames
     Log.d("FriendsScreen", "Username received: $username")
     val error = viewModel.errorMessage
     var selectedFriends = remember { mutableStateListOf<Player>() }
 
     LaunchedEffect(Unit) {
         viewModel.fetchFriendNames(
-            "04E7A6580B01031C53C63E003B49425F", username)
+            "04E7A6580B01031C53C63E003B49425F", username
+        )
     }
-
-    LaunchedEffect(friends) {
-        selectedFriends.clear() // Ensure clean slate
-        friends.find { it.personaname == username }?.let {
-            selectedFriends.add(it)
-            sharedViewModel.updateSharedFriendsList(selectedFriends)
-        }
-    }
-
-    val filteredFriends = friends.filter { it.personaname != username }
 
     Column(modifier = Modifier.padding(16.dp)) {
         if (error.isNotEmpty()) {
             Text(text = error)
         }
-        Button(onClick ={
+        Button(onClick = {
             navController.navigate(Routes.GAMES_SCREEN)
         }) {
             Text("Go to Games")
         }
 
         LazyColumn {
-            items(filteredFriends) { friend ->
+            items(friends) { friend ->
                 FriendSquare(
                     player = friend,
                     route = friend.profileurl,
