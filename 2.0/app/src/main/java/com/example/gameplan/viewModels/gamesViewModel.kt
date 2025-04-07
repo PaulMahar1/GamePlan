@@ -8,20 +8,11 @@
 package com.example.gameplan.viewmodel
 
 import RetrofitClient
-import SteamApiService
-import StoreClient
-import android.util.Log
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-
-import kotlinx.coroutines.launch
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.lifecycle.ViewModel
 import com.example.gameplan.data.Game
-import com.example.gameplan.data.GameData
-import com.example.gameplan.data.OwnedGames
 import com.example.gameplan.data.Player
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -48,6 +39,7 @@ class GameListViewModel : ViewModel() {
                     "04E7A6580B01031C53C63E003B49425F",
                     player.steamid!!
                 )
+
             //println(response)
             if (response.isSuccessful) {
                 val body = response.body()!!.ownedGamesResponse!!.games
