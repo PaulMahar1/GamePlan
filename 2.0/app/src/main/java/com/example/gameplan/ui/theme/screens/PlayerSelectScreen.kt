@@ -1,15 +1,15 @@
 package com.example.gameplan.ui.theme.screens
 
 import TypeSelectionDialog
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -19,12 +19,13 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.example.gameplan.R
 import com.example.gameplan.components.BottomNav
 import com.example.gameplan.components.NavBar
-import com.example.gameplan.components.TypeSquare
-import com.example.gameplan.data.Friend
+import com.example.gameplan.components.PlayerSelectSquare
 import com.example.gameplan.viewModels.SharedStateViewModel
 import kotlinx.coroutines.launch
 
@@ -42,42 +43,44 @@ fun PlayerSelectScreen(
     Scaffold(
         topBar = { NavBar() },
         bottomBar = { BottomNav(navController) }
-    ) { paddingValues: PaddingValues ->
+    ) { paddingValues ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
-                .padding(18.dp),
+                .padding(10.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Spacer(modifier = Modifier.height(250.dp))
+            Box(
+                modifier = Modifier
+                    .size(450.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.transparentlogo),
+                    contentDescription = "Logo"
+                )
+            }
 
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceEvenly
             ) {
-                TypeSquare(
-                    friend = Friend(
-                        1,
-                        "https://img.icons8.com/?size=100&id=yl8D7ARqyYe3&format=png&color=000000",
-                        "Single Player"
-                    ),
-                    onClick = {
-                        gameMode = GameMode.SinglePlayer
-                        showDialog = true
-                    }
-                )
-                TypeSquare(
-                    friend = Friend(
-                        2,
-                        "https://img.icons8.com/?size=100&id=JXxbQn0CKTqI&format=png&color=000000",
-                        "Multi Player"
-                    ),
-                    onClick = {
-                        gameMode = GameMode.Multiplayer
-                        showDialog = true
-                    }
-                )
+                PlayerSelectSquare(
+                    text = "Single Player",
+                    painter = painterResource(id = R.drawable.singleplayerlogo)
+                ) {
+                    gameMode = GameMode.SinglePlayer
+                    showDialog = true
+                }
+
+                PlayerSelectSquare(
+                    text = "Multi Player",
+                    painter = painterResource(id = R.drawable.multiplayerlogo)
+                ) {
+                    gameMode = GameMode.Multiplayer
+                    showDialog = true
+                }
             }
 
             if (showDialog && gameMode != null) {
@@ -100,7 +103,6 @@ fun PlayerSelectScreen(
         }
     }
 }
-
 
 //@Preview
 //@Composable

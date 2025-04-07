@@ -1,3 +1,13 @@
+/*TODO
+    Figure out why Favorite/Savedgamesscreen route is not working
+        clicking on it insta crashes the app.
+    I already tried making SavedGamesScreen the EXACT SAME as GamesScreen,
+        so not sure why the code would work on GamesScreen but not SavedGamesScreen.
+    I have an incling it has something to do with NavButton.kt
+    "NavButton(Icons.Filled.Favorite, "Favorite", Routes.GAMES_SCREEN, navController)"
+                                      --------------------------------
+*/
+
 package com.example.gameplan.components
 
 import androidx.compose.foundation.background

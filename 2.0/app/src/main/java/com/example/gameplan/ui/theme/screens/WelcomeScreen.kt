@@ -19,6 +19,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.gameplan.R
 
+
+
 @Composable fun WelcomeScreen(navController: NavHostController){
     Surface(
         modifier = Modifier
@@ -32,7 +34,6 @@ import com.example.gameplan.R
             Image(
                 painter = painterResource(id = R.drawable.transparentlogo),
                 contentDescription = "Logo",
-
             )
         }
     }
