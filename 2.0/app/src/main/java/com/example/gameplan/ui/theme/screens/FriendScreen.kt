@@ -102,7 +102,7 @@ fun FriendsScreen(
                     FriendSquare(
                         player = friend,
                         route = friend.profileurl,
-//                        navController = navController,
+                        navController = navController,
                         isSelected = selectedFriends.contains(friend),
                         onFriendSelected = { selected ->
                             if (selected) {

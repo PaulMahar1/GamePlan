@@ -13,13 +13,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.example.gameplan.data.Player
 
 @Composable
 fun FriendSquare(
     player: Player, route: String?,
-//    navController: NavHostController,
+    navController: NavHostController,
     isSelected: Boolean, // Indicate if the friend is selected
     onFriendSelected: (Boolean) -> Unit
 ) {
