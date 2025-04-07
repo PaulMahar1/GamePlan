@@ -22,6 +22,7 @@ import androidx.compose.ui.text.fromHtml
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.example.gameplan.data.GameData
+import com.example.gameplan.data.database.GameEntity
 
 // GamesScreen
 @Composable
@@ -61,7 +62,7 @@ fun ShowGame(game: GameData?, onClick: () -> Unit) {
 // SavedGamesScreen
 @Composable
 fun ShowSavedGame(
-    game: GameData?,
+    game: GameEntity?,
 
     onDelete: () -> Unit
 ) {
@@ -79,9 +80,9 @@ fun ShowSavedGame(
                     modifier = Modifier.padding(16.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Text(text = it.name ?: "", textAlign = TextAlign.Center)
+                    Text(text = it.gameName ?: "", textAlign = TextAlign.Center)
                     Spacer(modifier = Modifier.height(6.dp))
-                    Text(text = it.shortDescription ?: "", textAlign = TextAlign.Center)
+                    Text(text = it.gameDesc ?: "", textAlign = TextAlign.Center)
                 }
             }
         }

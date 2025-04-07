@@ -1,12 +1,12 @@
 import com.example.gameplan.data.FriendList
-import retrofit2.Response
-import retrofit2.http.GET
-import retrofit2.http.Query
 import com.example.gameplan.data.GameInfo
 import com.example.gameplan.data.GameTags
 import com.example.gameplan.data.OwnedGames
 import com.example.gameplan.data.PlayerSummary
 import com.example.gameplan.data.VanityId
+import retrofit2.Response
+import retrofit2.http.GET
+import retrofit2.http.Query
 
 interface SteamApiService {
 

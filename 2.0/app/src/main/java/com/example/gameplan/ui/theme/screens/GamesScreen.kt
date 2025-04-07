@@ -4,6 +4,7 @@
 
 package com.example.gameplan.ui.theme.screens
 
+import DatabaseProvider
 import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -27,8 +28,8 @@ import com.example.gameplan.components.NavBar
 import com.example.gameplan.data.GameData
 import com.example.gameplan.data.database.GameEntity
 import com.example.gameplan.ui.theme.ShowGame
-import com.example.gameplan.viewmodel.GameListViewModel
 import com.example.gameplan.viewModels.SharedStateViewModel
+import com.example.gameplan.viewmodel.GameListViewModel
 
 @Composable
 fun GamesScreen(

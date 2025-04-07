@@ -98,16 +98,20 @@ fun FriendsScreen(
                 verticalArrangement = Arrangement.spacedBy(8.dp),
                 contentPadding = PaddingValues(4.dp)
             ) {
-                items(friends) { friend ->
+                items(friends.sortedBy { it.personaname }) { friend ->
                     FriendSquare(
                         player = friend,
                         route = friend.profileurl,
 //                        navController = navController,
                         isSelected = selectedFriends.contains(friend),
                         onFriendSelected = { selected ->
-                            if (selected) selectedFriends += friend
-                            else selectedFriends -= friend
-                            sharedViewModel.updateSharedFriendsList(selectedFriends)
+                            if (selected) {
+                                selectedFriends.add(friend)
+                                sharedViewModel.updateSharedFriendsList(selectedFriends)
+                            } else {
+                                selectedFriends.remove(friend)
+                                sharedViewModel.updateSharedFriendsList(selectedFriends)
+                            }
                         }
                     )
                 }
