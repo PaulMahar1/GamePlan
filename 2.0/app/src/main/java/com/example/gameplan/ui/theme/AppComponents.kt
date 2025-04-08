@@ -1,18 +1,21 @@
 package com.example.gameplan.ui.theme
 
 import androidx.annotation.StringRes
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Star
+import androidx.compose.material3.AssistChip
 import androidx.compose.material3.Button
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
@@ -27,8 +30,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.fromHtml
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import coil.compose.rememberImagePainter
+import coil.compose.AsyncImage
+import com.example.gameplan.data.FakeGame
 import com.example.gameplan.data.GameData
 import com.example.gameplan.data.database.GameEntity
 
@@ -80,22 +85,23 @@ fun ShowGame(game: GameData?, onClick: () -> Unit) {
                 modifier = Modifier
                     .padding(8.dp) // Add padding to the card
                     .fillMaxWidth() // The card should take the full width
-                    .height(150.dp) // You can adjust the height based on your preference
+                    .height(350.dp) // You can adjust the height based on your preference
             ) {
                 game?.let {
                     // Main Row inside the card for layout
                     Row(
                         modifier = Modifier.fillMaxSize(),
-                        verticalAlignment = Alignment.CenterVertically
+                        verticalAlignment = Alignment.Top
                     ) {
-                        // Game Image Section (you can load the image with Coil or other image loading libraries)
-                        Image(
-                            painter = rememberImagePainter(it.capsuleImage), // You can replace this with actual image URL from the data
-                            contentDescription = it.name,
-                            modifier = Modifier
-                                .size(80.dp)
-                                .padding(start = 16.dp) // Padding to the left of the image
-                        )
+
+//                            AsyncImage(
+//                                model = it.headerImage,
+//                                contentDescription = it.name,
+//                                modifier = Modifier
+//                                    .size(80.dp)
+//                                    .padding(start = 16.dp) // Padding to the left of the image
+//                            )
+
 
                         // Game Info Section (Name, Description, etc.)
                         Column(
@@ -103,15 +109,66 @@ fun ShowGame(game: GameData?, onClick: () -> Unit) {
                                 .padding(start = 12.dp) // Space between image and text
                                 .weight(1f) // This allows the text to take up the remaining space
                         ) {
-                            // Game Name
-                            it.name?.let { name ->
-                                Text(
-                                    text = name,
-                                    style = MaterialTheme.typography.titleLarge,
-                                    modifier = Modifier.padding(bottom = 4.dp),
-                                    textAlign = TextAlign.Start
-                                )
+
+                            AsyncImage(
+                                model = it.headerImage,
+                                contentDescription = it.name,
+                                modifier = Modifier
+                                    .height(150.dp)
+                                    .padding(start = 16.dp) // Padding to the left of the image
+                            )
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                // Game Name
+                                it.name?.let { name ->
+                                    Text(
+                                        text = name,
+                                        style = MaterialTheme.typography.titleLarge,
+                                        modifier = Modifier.padding(bottom = 4.dp),
+                                        textAlign = TextAlign.Start
+                                    )
+                                }
+                                // Add to DB Icon
+                                IconButton(
+                                    onClick = onClick,
+                                    modifier = Modifier
+                                        .padding(end = 16.dp)
+                                ) {
+                                    Icon(
+                                        imageVector = Icons.Default.Star, // You can replace with your own star icon or an image
+                                        contentDescription = "Add to DB",
+                                        modifier = Modifier.size(24.dp)
+                                    )
+                                }
                             }
+
+                            LazyRow(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(horizontal = 8.dp),
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.spacedBy(4.dp)
+                            ) {
+                                items(it.genres!!.filterNotNull()) { item ->
+                                    AssistChip(
+                                        onClick = { /* Do Nothing! */ },
+                                        label = {
+                                            Text(
+                                                text = item.description ?: "",
+                                                style = MaterialTheme.typography.labelSmall // makes the text smaller
+                                            )
+                                        },
+                                        modifier = Modifier
+                                            .height(18.dp) // smaller height
+                                            .defaultMinSize(minHeight = 1.dp) // prevent minimum enforced height
+                                            .padding(vertical = 1.dp)
+                                    )
+                                }
+                            }
+
 
                             // Short Description
                             it.shortDescription?.let { description ->
@@ -124,19 +181,19 @@ fun ShowGame(game: GameData?, onClick: () -> Unit) {
                             }
                         }
 
-                        // Add to DB Icon (Tiny Star Icon)
-                        IconButton(
-                            onClick = onClick,
-                            modifier = Modifier
-                                .padding(end = 16.dp)
-                                .align(Alignment.CenterVertically) // Align the icon in the middle vertically
-                        ) {
-                            Icon(
-                                imageVector = Icons.Default.Star, // You can replace with your own star icon or an image
-                                contentDescription = "Add to DB",
-                                modifier = Modifier.size(24.dp)
-                            )
-                        }
+//                        // Add to DB Icon
+//                        IconButton(
+//                            onClick = onClick,
+//                            modifier = Modifier
+//                                .padding(end = 16.dp)
+//                                .align(Alignment.CenterVertically) // Align the icon in the middle vertically
+//                        ) {
+//                            Icon(
+//                                imageVector = Icons.Default.Star, // You can replace with your own star icon or an image
+//                                contentDescription = "Add to DB",
+//                                modifier = Modifier.size(24.dp)
+//                            )
+//                        }
                     }
                 }
             }
@@ -189,6 +246,8 @@ fun JamieHtml(@StringRes stringResourceId: Int){
 }
 
 
-
-// meow
-// woof >:3
+@Preview
+@Composable
+fun ShowGamePreview() {
+    ShowGame(game = FakeGame) { }
+}
