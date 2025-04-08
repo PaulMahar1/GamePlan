@@ -4,7 +4,7 @@
         see FriendScreen To do for more info
  */
 
-package com.example.gameplan.viewmodel
+package com.example.gameplan.viewModels
 
 
 import RetrofitClient

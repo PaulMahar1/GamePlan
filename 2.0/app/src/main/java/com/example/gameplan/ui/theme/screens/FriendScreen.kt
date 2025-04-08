@@ -45,8 +45,8 @@ import com.example.gameplan.components.BottomNav
 import com.example.gameplan.components.FriendSquare
 import com.example.gameplan.data.Player
 import com.example.gameplan.ui.theme.screens.Routes
+import com.example.gameplan.viewModels.FriendListViewModel
 import com.example.gameplan.viewModels.SharedStateViewModel
-import com.example.gameplan.viewmodel.FriendListViewModel
 
 @Composable
 fun FriendsScreen(

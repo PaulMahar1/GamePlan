@@ -6,7 +6,7 @@ typealias GameInfo = Map<String, GameTwo>
 
 data class GameTwo(
     @SerializedName("data")
-    val `data`: GameData?,
+    val data: GameData?,
     @SerializedName("success")
     val success: Boolean?
 )

@@ -10,11 +10,16 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -28,8 +33,9 @@ import com.example.gameplan.components.NavBar
 import com.example.gameplan.data.GameData
 import com.example.gameplan.data.database.GameEntity
 import com.example.gameplan.ui.theme.ShowGame
+import com.example.gameplan.viewModels.GameListViewModel
 import com.example.gameplan.viewModels.SharedStateViewModel
-import com.example.gameplan.viewmodel.GameListViewModel
+import kotlinx.coroutines.delay
 
 @Composable
 fun GamesScreen(
@@ -38,12 +44,20 @@ fun GamesScreen(
 ) {
     val sharedFriendsList by sharedViewModel.sharedFriendsList.collectAsState()
     val viewModel: GameListViewModel = viewModel()
+    var finalGames by remember { mutableStateOf<List<GameData?>>(emptyList()) }
 
     LaunchedEffect(sharedFriendsList) {
+        delay(500)
         viewModel.filterGames(sharedFriendsList)
+        delay(500)
+        finalGames = viewModel.allDetails(viewModel.gamesList) ?: emptyList()
+
     }
 
+
     val shownGames = viewModel.gamesList
+
+
     Log.d("Games Screen", "GamesScreen: $shownGames")
     Surface(
         modifier = Modifier.fillMaxSize()
@@ -98,24 +112,46 @@ fun GamesScreen(
                     website = null
                 )
                 val context = LocalContext.current
-                ShowGame(
-                    game = game,
-                    onClick = {
-                        val db = DatabaseProvider.getDatabase(context)
-                        val gameDao = db.gameDao()
+                LazyColumn {
+                    items(finalGames) { game ->
+                        ShowGame(
+                            game = game,
+                            onClick = {
+                                val db = DatabaseProvider.getDatabase(context)
+                                val gameDao = db.gameDao()
 
-                        Thread {
-                            gameDao.upsertGame(
-                                GameEntity(
-                                    gameId = game.steamAppid,
-                                    gameName = game.name,
-                                    gameImg = "", // Set appropriately
-                                    gameDesc = game.shortDescription ?: ""
-                                )
-                            )
-                        }.start()
+                                Thread {
+                                    gameDao.upsertGame(
+                                        GameEntity(
+                                            gameId = game?.steamAppid,
+                                            gameName = game?.name,
+                                            gameImg = "", // Set appropriately
+                                            gameDesc = game?.shortDescription ?: ""
+                                        )
+                                    )
+                                }.start()
+                            }
+                        )
                     }
-                )
+                }
+//                ShowGame(
+//                    game = game,
+//                    onClick = {
+//                        val db = DatabaseProvider.getDatabase(context)
+//                        val gameDao = db.gameDao()
+//
+//                        Thread {
+//                            gameDao.upsertGame(
+//                                GameEntity(
+//                                    gameId = game.steamAppid,
+//                                    gameName = game.name,
+//                                    gameImg = "", // Set appropriately
+//                                    gameDesc = game.shortDescription ?: ""
+//                                )
+//                            )
+//                        }.start()
+//                    }
+//                )
             }
             BottomNav(navController)
         }

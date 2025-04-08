@@ -5,14 +5,16 @@
     Make functioning api call for Selected Friends > Common Games
  */
 
-package com.example.gameplan.viewmodel
+package com.example.gameplan.viewModels
 
 import RetrofitClient
+import StoreClient
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import com.example.gameplan.data.Game
+import com.example.gameplan.data.GameData
 import com.example.gameplan.data.Player
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -55,6 +57,38 @@ class GameListViewModel : ViewModel() {
             return null
 
         }
+    }
+
+    suspend fun allDetails(body: List<Int?>?): List<GameData?> {
+        if (body != null) {
+            val gameDataList = mutableListOf<GameData?>()
+            for (item in body) {
+                try {
+                    val allResponse =
+                        StoreClient.api.getGameDetails(
+                            item.toString()
+                        )
+
+                    if (allResponse.isSuccessful) {
+                        // Extract only the 'data' part from the response body
+                        val gameData = allResponse.body()?.values?.firstOrNull()?.data
+
+                        // Add the game data to the list if it exists
+                        if (gameData != null) {
+                            gameDataList.add(gameData)
+                        } else {
+                            println("No game data found for appid $item")
+                        }
+                    } else {
+                        println("API call failed for appid $item: ${allResponse.code()}")
+                    }
+                } catch (e: Exception) {
+                    println("Error fetching details for appid $item: ${e.message}")
+                }
+            }
+            return gameDataList // Return the list of game data
+        }
+        return emptyList() // Return an empty list if 'body' is null
     }
 
 }
