@@ -19,7 +19,7 @@ import com.example.gameplan.ui.theme.Typography
 
 
 @Composable
-fun NavBar() {
+fun NavBar(name: String) {
     Column(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
@@ -28,13 +28,13 @@ fun NavBar() {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(color = Color.Cyan)
+                .background(color = Color.LightGray)
                 .height(46.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
                 modifier = Modifier.fillMaxWidth(),
-                text = "Game Plan",
+                text = name,
                 textAlign = TextAlign.Center,
                 style = Typography.titleLarge
             )
@@ -45,7 +45,7 @@ fun NavBar() {
 @Preview
 @Composable
 fun NavBarPreview() {
-    NavBar()
+    NavBar(name = "Test")
 }
 
 

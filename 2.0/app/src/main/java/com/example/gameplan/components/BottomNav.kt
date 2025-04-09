@@ -37,7 +37,7 @@ fun BottomNav(navController: NavHostController, modifier: Modifier = Modifier) {
             modifier = Modifier
                 .height(56.dp)
                 .fillMaxWidth()
-                .background(color = Color.Cyan),
+                .background(color = Color.LightGray),
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
             NavButton(Icons.Filled.Home, "Home", Routes.WELCOME_SCREEN, navController)

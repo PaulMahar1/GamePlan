@@ -24,7 +24,6 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.gameplan.R
 import com.example.gameplan.components.BottomNav
-import com.example.gameplan.components.NavBar
 import com.example.gameplan.components.PlayerSelectSquare
 import com.example.gameplan.viewModels.SharedStateViewModel
 import kotlinx.coroutines.launch
@@ -41,7 +40,7 @@ fun PlayerSelectScreen(
     val scope = rememberCoroutineScope()
 
     Scaffold(
-        topBar = { NavBar() },
+//        topBar = { NavBar("Oh hey there") },
         bottomBar = { BottomNav(navController) }
     ) { paddingValues ->
         Column(

@@ -10,7 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
@@ -46,6 +46,7 @@ fun GamesScreen(
     val viewModel: GameListViewModel = viewModel()
     var finalGames by remember { mutableStateOf<List<GameData?>>(emptyList()) }
 
+
     LaunchedEffect(sharedFriendsList) {
         delay(500)
         viewModel.filterGames(sharedFriendsList)
@@ -60,7 +61,7 @@ fun GamesScreen(
         modifier = Modifier.fillMaxSize()
     ) {
         Column(modifier = Modifier.fillMaxWidth()) {
-            NavBar()
+            NavBar("Mutual Games")
             // Wrap the content in a Box to center the loading indicator vertically/horizontally
             Box(
                 modifier = Modifier
@@ -76,11 +77,13 @@ fun GamesScreen(
                         items(finalGames) { game ->
                             ShowGame(
                                 game = game,
-                                icon = Icons.Default.Star,
+                                icon = Icons.Outlined.Favorite,
                                 onClick = {
+
                                     // Offload database operation off the main thread
                                     Thread {
-                                        val db = DatabaseProvider.getDatabase(context)
+
+                                    val db = DatabaseProvider.getDatabase(context)
                                         val gameDao = db.gameDao()
                                         gameDao.upsertGame(
                                             GameEntity(
