@@ -38,7 +38,7 @@ import com.example.gameplan.viewModels.SharedStateViewModel
 import kotlinx.coroutines.delay
 
 @Composable
-fun GamesScreen(
+fun SingleplayerGamesScreen(
     navController: NavHostController,
     sharedViewModel: SharedStateViewModel = viewModel()
 ) {
@@ -53,7 +53,7 @@ fun GamesScreen(
         finalGames = viewModel.allDetails(viewModel.gamesList)
     }
 
-    Log.d("Games Screen", "GamesScreen: ${viewModel.gamesList}")
+    Log.d("Singleplayer Screen", "SingleplayerScreen: ${viewModel.gamesList}")
     val context = LocalContext.current
 
     Surface(
@@ -105,6 +105,6 @@ fun GamesScreen(
 
 @Preview
 @Composable
-fun GamesScreenPreview() {
-    GamesScreen(rememberNavController())
+fun SingleplayerGamesScreenPreview() {
+    SingleplayerGamesScreen(rememberNavController())
 }

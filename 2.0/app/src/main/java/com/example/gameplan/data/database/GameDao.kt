@@ -12,13 +12,9 @@ interface GameDao {
     @Upsert
     fun upsertGame(gameEntity: GameEntity)
 
-    // delete game
-    @Delete
-    fun deleteGame(gameEntity: GameEntity)
-
     //testing delete
     @Query("DELETE FROM savedGames WHERE gameId = :id")
-    fun testdeleteGame(id: Int?)
+    fun deleteGame(id: Int?)
 
     // get all games
     @Query("SELECT * FROM savedGames")

@@ -1,9 +1,3 @@
-/*TODO
-    Not sure if its in here or in the gamesViewModel
-        But we need to figure out why the 'go to games' button on FriendScreen crashes
-        see FriendScreen To do for more info
- */
-
 package com.example.gameplan.viewModels
 
 
@@ -37,9 +31,9 @@ class FriendListViewModel : ViewModel() {
                 if (response.isSuccessful) {
                     val vanityResponse = response.body()
                     if (vanityResponse != null && vanityResponse.response.success == 1) {
-                       playerId = vanityResponse.response.steamid
+                        playerId = vanityResponse.response.steamid
                         errorMessage2 = ""
-                       println("Ok 1st Call worked... $playerId ${vanityResponse.response.steamid} ${vanityResponse.response.success}")
+                        println("Ok 1st Call worked... $playerId ${vanityResponse.response.steamid} ${vanityResponse.response.success}")
                     } else {
                         errorMessage2 = "Failed to resolve vanity URL."
                         println("Failed to resolved vanity URL")
@@ -47,7 +41,8 @@ class FriendListViewModel : ViewModel() {
                 }
                 val friendListResponse = RetrofitClient.api.getFriendList(apiKey, playerId)
                 if (friendListResponse.isSuccessful) {
-                    val friends = friendListResponse.body()?.friendsListResponse?.friends?.filterNotNull()
+                    val friends =
+                        friendListResponse.body()?.friendsListResponse?.friends?.filterNotNull()
                     println("Fetched Friends: $friends")  // Add this log to check friends
 
                     val ids = friends?.mapNotNull { it.steamid }?.joinToString(",")

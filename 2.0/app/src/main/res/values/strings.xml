@@ -61,28 +61,28 @@
 ]]>
 </string>
 
-<string name="GetSteamId">
+    <string name="GetSteamId">
     https://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/?key=APIKEYHERE&amp;vanityurl=USERNAMEHERE
 </string>
 
-<string name="FriendListAPI">
+    <string name="FriendListAPI">
     https://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key=APIKEYHERE&amp;steamid=IDHERE&amp;relationship=friend
 </string>
 
-<string name="OwnedGamesAPI">
+    <string name="OwnedGamesAPI">
 <!--/include_played_free_games (optional, bool)-->
-    https://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=APIKEYHERE&amp;steamid=76561198104511614&amp;format=json#
+        https://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=APIKEYHERE&amp;steamid=76561198104511614&amp;format=json#
 </string>
 
-<string name="GetPlayerSummary">
+    <string name="GetPlayerSummary">
     https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=APIKEYHERE&amp;steamids=FRIENDIDHERE
 </string>
 
-<string name="GetGameDetails">
+    <string name="GetGameDetails">
     https://store.steampowered.com/api/appdetails?key=APIKEYHERE&amp;appids=GAMEIDHERE
 </string>
 
-<string name="GetGameTags">
+    <string name="GetGameTags">
     https://steamspy.com/api.php?request=appdetails&amp;appid=GAMEIDHERE
 </string>
 

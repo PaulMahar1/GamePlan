@@ -49,7 +49,7 @@ fun BottomNav(navController: NavHostController, modifier: Modifier = Modifier) {
 
 @Preview
 @Composable
-fun BottomNavPreview(){
+fun BottomNavPreview() {
     val navController = androidx.navigation.compose.rememberNavController()
     BottomNav(navController)
 }

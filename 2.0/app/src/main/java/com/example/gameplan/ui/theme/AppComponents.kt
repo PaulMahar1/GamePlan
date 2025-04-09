@@ -26,6 +26,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.fromHtml
@@ -73,14 +74,14 @@ import com.example.gameplan.data.database.GameEntity
 //}
 
 @Composable
-fun ShowGame(game: GameData?, onClick: () -> Unit) {
+fun ShowGame(game: GameData?, onClick: () -> Unit, icon: ImageVector?) {
     Column(modifier = Modifier.fillMaxWidth()) {
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.Center
         ) {
             ElevatedCard(
-                onClick = onClick,
+
                 elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),
                 modifier = Modifier
                     .padding(8.dp) // Add padding to the card
@@ -137,11 +138,13 @@ fun ShowGame(game: GameData?, onClick: () -> Unit) {
                                     modifier = Modifier
                                         .padding(end = 16.dp)
                                 ) {
-                                    Icon(
-                                        imageVector = Icons.Default.Star, // You can replace with your own star icon or an image
-                                        contentDescription = "Add to DB",
-                                        modifier = Modifier.size(24.dp)
-                                    )
+                                    if (icon != null) {
+                                        Icon(
+                                            imageVector = icon, // You can replace with your own star icon or an image
+                                            contentDescription = "Add to DB",
+                                            modifier = Modifier.size(24.dp)
+                                        )
+                                    }
                                 }
                             }
 
@@ -152,7 +155,7 @@ fun ShowGame(game: GameData?, onClick: () -> Unit) {
                                 verticalAlignment = Alignment.CenterVertically,
                                 horizontalArrangement = Arrangement.spacedBy(4.dp)
                             ) {
-                                items(it.genres!!.filterNotNull()) { item ->
+                                items(it.genres?.filterNotNull() ?: emptyList()) { item ->
                                     AssistChip(
                                         onClick = { /* Do Nothing! */ },
                                         label = {
@@ -162,11 +165,12 @@ fun ShowGame(game: GameData?, onClick: () -> Unit) {
                                             )
                                         },
                                         modifier = Modifier
-                                            .height(18.dp) // smaller height
-                                            .defaultMinSize(minHeight = 1.dp) // prevent minimum enforced height
+                                            .height(18.dp)
+                                            .defaultMinSize(minHeight = 1.dp)
                                             .padding(vertical = 1.dp)
                                     )
                                 }
+
                             }
 
 
@@ -180,20 +184,6 @@ fun ShowGame(game: GameData?, onClick: () -> Unit) {
                                 )
                             }
                         }
-
-//                        // Add to DB Icon
-//                        IconButton(
-//                            onClick = onClick,
-//                            modifier = Modifier
-//                                .padding(end = 16.dp)
-//                                .align(Alignment.CenterVertically) // Align the icon in the middle vertically
-//                        ) {
-//                            Icon(
-//                                imageVector = Icons.Default.Star, // You can replace with your own star icon or an image
-//                                contentDescription = "Add to DB",
-//                                modifier = Modifier.size(24.dp)
-//                            )
-//                        }
                     }
                 }
             }
@@ -241,13 +231,7 @@ fun ShowSavedGame(
 }
 
 @Composable
-fun JamieHtml(@StringRes stringResourceId: Int){
+fun JamieHtml(@StringRes stringResourceId: Int) {
     Text(text = AnnotatedString.fromHtml(stringResource(id = stringResourceId)))
 }
 
-
-@Preview
-@Composable
-fun ShowGamePreview() {
-    ShowGame(game = FakeGame) { }
-}

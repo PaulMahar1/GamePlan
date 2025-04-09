@@ -52,8 +52,7 @@ fun PlayerSelectScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Box(
-                modifier = Modifier
-                    .size(450.dp),
+                modifier = Modifier.size(450.dp),
                 contentAlignment = Alignment.Center
             ) {
                 Image(
@@ -92,8 +91,10 @@ fun PlayerSelectScreen(
                             sharedStateViewModel.updatedCurrentPlayer(username)
                         }
                         if (gameMode == GameMode.SinglePlayer) {
-                            navController.navigate(Routes.GAMES_SCREEN)
+                            // Navigate to the single player games screen
+                            navController.navigate(Routes.SINGLEPLAYER_SCREEN)
                         } else {
+                            // Navigate to the friend selection screen (multiplayer)
                             navController.navigate("FRIEND_SCREEN/$username")
                         }
                         showDialog = false
@@ -103,9 +104,3 @@ fun PlayerSelectScreen(
         }
     }
 }
-
-//@Preview
-//@Composable
-//fun PlayerSelectScreenPreview() {
-//    PlayerSelectScreen(rememberNavController(), sharedStateViewModel = /* Provide a view model instance */)
-//}

@@ -1,6 +1,6 @@
 package com.example.gameplan.ui.theme.screens
 
-object Routes{
+object Routes {
 
     const val PLAYER_SELECT_SCREEN = "PLAYER_SELECT_SCREEN"
     const val WELCOME_SCREEN = "WELCOME_SCREEN"
@@ -8,4 +8,5 @@ object Routes{
     const val GAMES_SCREEN = "GAMES_SCREEN"
     const val FRIEND_SCREEN = "FRIEND_SCREEN/{username}"
     const val SAVED_GAMES_SCREEN = "SAVED_GAMES_SCREEN"
+    const val SINGLEPLAYER_SCREEN = "SINGLEPLAYER_SCREEN"
 }

@@ -12,7 +12,9 @@ object DatabaseProvider {
                 context.applicationContext,
                 GameDatabase::class.java,
                 "game_database"
-            ).build()
+            )
+                .fallbackToDestructiveMigration() // this will wipe the data if migration is missing or the schema changes
+                .build()
             INSTANCE = instance
             instance
         }

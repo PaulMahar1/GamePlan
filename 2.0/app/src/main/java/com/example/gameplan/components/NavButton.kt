@@ -22,7 +22,7 @@ import com.example.gameplan.ui.theme.screens.Routes
 fun NavButton(iconIn: ImageVector, name: String, route: String, navController: NavHostController) {
     Box(modifier = Modifier.size(48.dp)) {
         IconButton(
-            onClick = {navController.navigate(route)},
+            onClick = { navController.navigate(route) },
             modifier = Modifier.fillMaxSize(),
             enabled = true,
             colors = IconButtonDefaults.iconButtonColors(contentColor = Color.White),
@@ -34,7 +34,7 @@ fun NavButton(iconIn: ImageVector, name: String, route: String, navController: N
 
 @Preview
 @Composable
-fun NavButtonPreview(){
+fun NavButtonPreview() {
     val navController = androidx.navigation.compose.rememberNavController()
     NavButton(Icons.Filled.Favorite, "Favorite", Routes.GAMES_SCREEN, navController)
 }

@@ -13,82 +13,83 @@ data class GameTwo(
 
 data class GameData(
     @SerializedName("about_the_game")
-    val aboutTheGame: String?,
+    val aboutTheGame: String? = null,
     @SerializedName("achievements")
-    val achievements: Achievements?,
+    val achievements: Achievements? = null,
     @SerializedName("background")
-    val background: String?,
+    val background: String? = null,
     @SerializedName("background_raw")
-    val backgroundRaw: String?,
+    val backgroundRaw: String? = null,
     @SerializedName("capsule_image")
-    val capsuleImage: String?,
+    val capsuleImage: String? = null,
     @SerializedName("capsule_imagev5")
-    val capsuleImagev5: String?,
+    val capsuleImagev5: String? = null,
     @SerializedName("categories")
-    val categories: List<Category?>?,
+    val categories: List<Category?>? = emptyList(),
     @SerializedName("content_descriptors")
-    val contentDescriptors: ContentDescriptors?,
+    val contentDescriptors: ContentDescriptors? = null,
     @SerializedName("controller_support")
-    val controllerSupport: String?,
+    val controllerSupport: String? = null,
     @SerializedName("detailed_description")
-    val detailedDescription: String?,
+    val detailedDescription: String? = null,
     @SerializedName("developers")
-    val developers: List<String?>?,
+    val developers: List<String?>? = emptyList(),
     @SerializedName("dlc")
-    val dlc: List<Int?>?,
+    val dlc: List<Int?>? = emptyList(),
     @SerializedName("genres")
-    val genres: List<Genre?>?,
+    val genres: List<Genre?>? = emptyList(),
     @SerializedName("header_image")
-    val headerImage: String?,
+    val headerImage: String? = null,
     @SerializedName("is_free")
-    val isFree: Boolean?,
+    val isFree: Boolean? = false,
     @SerializedName("linux_requirements")
-    val linuxRequirements: LinuxRequirements?,
+    val linuxRequirements: LinuxRequirements? = null,
     @SerializedName("mac_requirements")
-    val macRequirements: MacRequirements?,
+    val macRequirements: MacRequirements? = null,
     @SerializedName("metacritic")
-    val metacritic: Metacritic?,
+    val metacritic: Metacritic? = null,
     @SerializedName("movies")
-    val movies: List<Movy?>?,
+    val movies: List<Movy?>? = emptyList(),
     @SerializedName("name")
-    val name: String?,
+    val name: String? = null,
     @SerializedName("package_groups")
-    val packageGroups: List<PackageGroup?>?,
+    val packageGroups: List<PackageGroup?>? = emptyList(),
     @SerializedName("packages")
-    val packages: List<Int?>?,
+    val packages: List<Int?>? = emptyList(),
     @SerializedName("pc_requirements")
-    val pcRequirements: PcRequirements?,
+    val pcRequirements: PcRequirements? = null,
     @SerializedName("platforms")
-    val platforms: Platforms?,
+    val platforms: Platforms? = null,
     @SerializedName("price_overview")
-    val priceOverview: PriceOverview?,
+    val priceOverview: PriceOverview? = null,
     @SerializedName("publishers")
-    val publishers: List<String?>?,
+    val publishers: List<String?>? = emptyList(),
     @SerializedName("ratings")
-    val ratings: Ratings?,
+    val ratings: Ratings? = null,
     @SerializedName("recommendations")
-    val recommendations: Recommendations?,
+    val recommendations: Recommendations? = null,
     @SerializedName("release_date")
-    val releaseDate: ReleaseDate?,
+    val releaseDate: ReleaseDate? = null,
     @SerializedName("required_age")
-    val requiredAge: Int?,
+    val requiredAge: Int? = 0,
     @SerializedName("reviews")
-    val reviews: String?,
+    val reviews: String? = null,
     @SerializedName("screenshots")
-    val screenshots: List<Screenshot?>?,
+    val screenshots: List<Screenshot?>? = emptyList(),
     @SerializedName("short_description")
-    val shortDescription: String?,
+    val shortDescription: String? = null,
     @SerializedName("steam_appid")
-    val steamAppid: Int?,
+    val steamAppid: Int? = null,
     @SerializedName("support_info")
-    val supportInfo: SupportInfo?,
+    val supportInfo: SupportInfo? = null,
     @SerializedName("supported_languages")
-    val supportedLanguages: String?,
+    val supportedLanguages: String? = null,
     @SerializedName("type")
-    val type: String?,
+    val type: String? = null,
     @SerializedName("website")
-    val website: String?
+    val website: String? = null
 )
+
 
 data class Achievements(
     @SerializedName("highlighted")

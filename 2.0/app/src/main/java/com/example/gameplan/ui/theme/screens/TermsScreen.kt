@@ -21,24 +21,25 @@ import com.example.gameplan.R
 import com.example.gameplan.ui.theme.JamieHtml
 
 @Composable
-fun TermsScreen(navController: NavController){
+fun TermsScreen(navController: NavController) {
 
     Surface(
         modifier = Modifier.fillMaxSize()
-    ){
+    ) {
         Column(
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
                 .padding(16.dp)
                 .verticalScroll(rememberScrollState())
         ) {
             JamieHtml(R.string.Terms)
             Button(
-                onClick = {navController.navigate(Routes.PLAYER_SELECT_SCREEN) },
+                onClick = { navController.navigate(Routes.PLAYER_SELECT_SCREEN) },
                 modifier = Modifier
                     .fillMaxWidth(0.8f)
                     .align(Alignment.CenterHorizontally)
                     .height(48.dp)
-                ) {
+            ) {
                 Text(text = "Accept Terms")
             }
         }
@@ -47,6 +48,6 @@ fun TermsScreen(navController: NavController){
 
 @Preview
 @Composable
-fun TermsScreenPreview(){
+fun TermsScreenPreview() {
     TermsScreen(rememberNavController())
 }

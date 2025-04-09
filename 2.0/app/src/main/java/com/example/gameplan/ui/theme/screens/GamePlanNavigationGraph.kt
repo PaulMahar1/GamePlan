@@ -13,26 +13,34 @@ import com.example.gameplan.viewModels.SharedStateViewModel
 
 
 @Composable
-fun GamePlanNavigationGraph(){
+fun GamePlanNavigationGraph() {
 
     val navController = rememberNavController()
-    val sharedViewModel : SharedStateViewModel = viewModel()
-    NavHost(navController = navController, startDestination = Routes.WELCOME_SCREEN){
+    val sharedViewModel: SharedStateViewModel = viewModel()
+    NavHost(navController = navController, startDestination = Routes.WELCOME_SCREEN) {
 
-        composable(Routes.PLAYER_SELECT_SCREEN){
-            PlayerSelectScreen(navController,sharedViewModel)
+        composable(Routes.PLAYER_SELECT_SCREEN) {
+            PlayerSelectScreen(navController, sharedViewModel)
         }
 
-        composable(Routes.WELCOME_SCREEN){
+        composable(Routes.WELCOME_SCREEN) {
             WelcomeScreen(navController)
         }
 
-        composable(Routes.TERMS_SCREEN){
+        composable(Routes.TERMS_SCREEN) {
             TermsScreen(navController)
         }
 
-        composable(Routes.GAMES_SCREEN){
+        composable(Routes.GAMES_SCREEN) {
             GamesScreen(navController, sharedViewModel)
+        }
+
+        composable(Routes.SINGLEPLAYER_SCREEN) {
+            SingleplayerGamesScreen(navController, sharedViewModel)
+        }
+
+        composable(Routes.SAVED_GAMES_SCREEN) {
+            SavedGamesScreen(navController)
         }
 
         composable(
@@ -43,18 +51,16 @@ fun GamePlanNavigationGraph(){
         ) { entry ->
             val username = entry.arguments?.getString("username")
             if (username != null) {
-                FriendsScreen(navController = navController, username = username, sharedViewModel = sharedViewModel)
+                FriendsScreen(
+                    navController = navController,
+                    username = username,
+                    sharedViewModel = sharedViewModel
+                )
             } else {
                 // Handle missing username, maybe navigate back
                 Log.e("Navigation", "Username is missing!")
             }
         }
-
-        composable(Routes.SAVED_GAMES_SCREEN) {
-            SavedGamesScreen(navController)
-        }
-
-
     }
 }
 

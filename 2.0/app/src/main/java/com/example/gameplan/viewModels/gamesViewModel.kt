@@ -22,16 +22,22 @@ import kotlinx.coroutines.withContext
 
 class GameListViewModel : ViewModel() {
     var gamesList by mutableStateOf<List<Int>>(emptyList())
-    suspend fun filterGames(players: List<Player>) =
-        withContext(Dispatchers.IO) {
-            val commonGameIds: List<Int> = players.flatMap { getGames(it)!!.mapNotNull { it?.appid } }
-                .groupingBy { it }
-                .eachCount()
-                .filterValues { it == players.size }
-                .keys.toList()
-            gamesList = commonGameIds
 
-   }
+    suspend fun filterGames(players: List<Player>) = withContext(Dispatchers.IO) {
+        val commonGameIds: List<Int> = players
+            .flatMap { player ->
+                // Use safe call and provide empty list if getGames returns null
+                getGames(player)?.mapNotNull { it?.appid } ?: emptyList()
+            }
+            .groupingBy { it }
+            .eachCount()
+            .filterValues { it == players.size }
+            .keys
+            .toList()
+        gamesList = commonGameIds
+    }
+
+
 
     private suspend fun getGames(player: Player): List<Game?>? {
         try {
