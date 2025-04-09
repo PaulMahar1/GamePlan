@@ -1,13 +1,17 @@
 package com.example.gameplan.viewModels
 
-
 import RetrofitClient
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.gameplan.data.Game
+import com.example.gameplan.data.GameData
+import com.example.gameplan.data.OwnedGames
 import com.example.gameplan.data.Player
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class FriendListViewModel : ViewModel() {
@@ -22,7 +26,6 @@ class FriendListViewModel : ViewModel() {
 
     var errorMessage2 by mutableStateOf("")
         private set
-
 
     fun fetchFriendNames(apiKey: String, steamId: String) {
         viewModelScope.launch {
@@ -70,3 +73,4 @@ class FriendListViewModel : ViewModel() {
         }
     }
 }
+

@@ -1,24 +1,3 @@
-/*
-TODO
-    EDIT - NEVERMIND THE STUFF I SAY BELOW VVV
-    IDK WHAT I CHANGED BUT NOW I CAN CLICK FRIENDS AND IT WONT CRASH
-    unless when u pull it breaks for you... idek anymore man :,)
-
-TODO
-    'Go to games'/GamesScreen has actually always been crashing.
-    I went back through all my commits thinking I had done something that broke it.
-    Went back to the last commit you did when you said it was working
-        and it actually wasn't properly.
-    To recreate a crash, relaunch app fresh, choose multiplayer, enter proper username,
-        click any amount of friends, click 'go to games' = CRASH.
-    To avoid a crash, you can either input an improper username, or dont select friends
-        or load the GamesScreen through singleplayer first, any subsequent time you go
-        to the gamesscreen until you reload the app it will open fine, but if you follow
-        the crash steps, it crashes every time.
-    This leads me to believe its just a functionality problem where when it actually tries
-        to make the api call 'properly' it dies
-*/
-
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column

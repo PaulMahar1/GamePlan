@@ -92,7 +92,7 @@ fun PlayerSelectScreen(
                         }
                         if (gameMode == GameMode.SinglePlayer) {
                             // Navigate to the single player games screen
-                            navController.navigate(Routes.SINGLEPLAYER_SCREEN)
+                            navController.navigate("SINGLEPLAYER_SCREEN/$username")
                         } else {
                             // Navigate to the friend selection screen (multiplayer)
                             navController.navigate("FRIEND_SCREEN/$username")

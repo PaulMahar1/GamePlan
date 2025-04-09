@@ -1,6 +1,7 @@
 package com.example.gameplan.ui.theme.screens
 
 import FriendsScreen
+import SingleplayerGamesScreen
 import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -35,10 +36,6 @@ fun GamePlanNavigationGraph() {
             GamesScreen(navController, sharedViewModel)
         }
 
-        composable(Routes.SINGLEPLAYER_SCREEN) {
-            SingleplayerGamesScreen(navController, sharedViewModel)
-        }
-
         composable(Routes.SAVED_GAMES_SCREEN) {
             SavedGamesScreen(navController)
         }
@@ -52,6 +49,25 @@ fun GamePlanNavigationGraph() {
             val username = entry.arguments?.getString("username")
             if (username != null) {
                 FriendsScreen(
+                    navController = navController,
+                    username = username,
+                    sharedViewModel = sharedViewModel
+                )
+            } else {
+                // Handle missing username, maybe navigate back
+                Log.e("Navigation", "Username is missing!")
+            }
+        }
+
+        composable(
+            route = "SINGLEPLAYER_SCREEN/{username}",
+            arguments = listOf(navArgument("username") {
+                type = NavType.StringType
+            })
+        ) { entry ->
+            val username = entry.arguments?.getString("username")
+            if (username != null) {
+                SingleplayerGamesScreen(
                     navController = navController,
                     username = username,
                     sharedViewModel = sharedViewModel

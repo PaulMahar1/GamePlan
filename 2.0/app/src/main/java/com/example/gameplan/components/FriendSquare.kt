@@ -1,5 +1,6 @@
 package com.example.gameplan.components
 
+import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -31,6 +32,7 @@ fun FriendSquare(
         ElevatedCard(
             onClick = {
                 onFriendSelected(!isSelected)
+                Log.e("fun","friend button clicked ${player.personaname}")
             },
             elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),
             modifier = Modifier

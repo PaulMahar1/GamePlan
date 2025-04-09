@@ -9,6 +9,7 @@ package com.example.gameplan.viewModels
 
 import RetrofitClient
 import StoreClient
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -21,12 +22,15 @@ import kotlinx.coroutines.withContext
 
 
 class GameListViewModel : ViewModel() {
+
     var gamesList by mutableStateOf<List<Int>>(emptyList())
 
     suspend fun filterGames(players: List<Player>) = withContext(Dispatchers.IO) {
+        Log.d("fun", "filterGames called $players")
         val commonGameIds: List<Int> = players
             .flatMap { player ->
                 // Use safe call and provide empty list if getGames returns null
+                Log.e("fun","$player")
                 getGames(player)?.mapNotNull { it?.appid } ?: emptyList()
             }
             .groupingBy { it }
@@ -34,41 +38,44 @@ class GameListViewModel : ViewModel() {
             .filterValues { it == players.size }
             .keys
             .toList()
+            .take(50)
+
         gamesList = commonGameIds
     }
 
 
 
     private suspend fun getGames(player: Player): List<Game?>? {
-        try {
-            //println("Is this getting read?")
-            val response =
-                RetrofitClient.api.getOwnedGames(
-                    "04E7A6580B01031C53C63E003B49425F",
-                    player.steamid!!
-                )
+        Log.d("fun", "getGames called $player")
+        return try {
+            val response = RetrofitClient.api.getOwnedGames(
+                "04E7A6580B01031C53C63E003B49425F",
+                player.steamid!!
+            )
 
-            //println(response)
             if (response.isSuccessful) {
-                val body = response.body()!!.ownedGamesResponse!!.games
-                return body
-                // println("Fetched Successfully")
+                val body = response.body()?.ownedGamesResponse?.games
+                body?.take(50)
+
             } else {
-
-                //  println("Failed to resolve game URL")
-                return null
+                null
             }
+
         } catch (e: Exception) {
-
-            return null
-
+            null
         }
+
     }
 
+
+
+
     suspend fun allDetails(body: List<Int?>?): List<GameData?> {
+        Log.d("fun", "allDetails called $body")
         if (body != null) {
             val gameDataList = mutableListOf<GameData?>()
             for (item in body) {
+                Log.d("fun", "$item")
                 try {
                     val allResponse =
                         StoreClient.api.getGameDetails(
@@ -96,7 +103,6 @@ class GameListViewModel : ViewModel() {
         }
         return emptyList() // Return an empty list if 'body' is null
     }
-
 }
 //    var errorMessage by mutableStateOf("")
 //
