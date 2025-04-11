@@ -30,11 +30,14 @@ import kotlinx.coroutines.launch
 
 enum class GameMode { SinglePlayer, Multiplayer }
 
+
 @Composable
 fun PlayerSelectScreen(
     navController: NavHostController,
     sharedStateViewModel: SharedStateViewModel
 ) {
+
+
     var showDialog by remember { mutableStateOf(false) }
     var gameMode by remember { mutableStateOf<GameMode?>(null) }
     val scope = rememberCoroutineScope()
