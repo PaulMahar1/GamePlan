@@ -1,6 +1,9 @@
 package com.example.gameplan.ui.theme
 
+import android.content.Intent
+import android.net.Uri
 import androidx.annotation.StringRes
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -13,8 +16,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.AssistChip
 import androidx.compose.material3.Button
 import androidx.compose.material3.CardDefaults
@@ -27,14 +28,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.fromHtml
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.example.gameplan.data.FakeGame
 import com.example.gameplan.data.GameData
 import com.example.gameplan.data.database.GameEntity
 
@@ -75,6 +75,7 @@ import com.example.gameplan.data.database.GameEntity
 
 @Composable
 fun ShowGame(game: GameData?, onClick: () -> Unit, icon: ImageVector?) {
+    val context = LocalContext.current
     Column(modifier = Modifier.fillMaxWidth()) {
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -117,6 +118,13 @@ fun ShowGame(game: GameData?, onClick: () -> Unit, icon: ImageVector?) {
                                 modifier = Modifier
                                     .height(150.dp)
                                     .padding(start = 16.dp) // Padding to the left of the image
+                                    .clickable {
+                                        val intent = Intent(
+                                            Intent.ACTION_VIEW,
+                                            Uri.parse("http://store.steampowered.com/app/" + it.steamAppid)
+                                        )
+                                        context.startActivity(intent)
+                                    }
                             )
                             Row(
                                 modifier = Modifier.fillMaxWidth(),

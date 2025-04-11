@@ -55,7 +55,7 @@ class GameListViewModel : ViewModel() {
 
             if (response.isSuccessful) {
                 val body = response.body()?.ownedGamesResponse?.games
-                body?.take(50)
+                body?.take(1000)
 
             } else {
                 null
